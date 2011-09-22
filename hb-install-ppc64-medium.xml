@@ -1,0 +1,603 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/ja/handbook/hb-install-ppc64-medium.xml,v 1.4 2006/01/12 17:20:08 idani Exp $ -->
+
+<!-- Translator: Yuta SATOH -->
+<!-- Original revision: 1.23 -->
+
+<sections>
+
+<version>2.6</version>
+<date>2005-09-15</date>
+
+<section>
+<title>ハードウェア要件</title>
+<subsection>
+<title>はじめに</title>
+<body>
+
+<p>
+始める前に、まず最初にGentooをうまくインストールするために必要なハードウェア要件は、何であるかを示します。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>ハードウェア要件</title>
+<body>
+
+<table>
+<tr>
+  <th>CPU</th>
+  <ti>PowerPC64 CPUならどれでも</ti>
+</tr>
+<tr>
+  <th>システム</th>
+  <ti>
+    IBM RS/6000、Power Macintosh G5、IBM pSeries、そしてIBM iSeries
+  </ti>
+</tr>
+<tr>
+  <th>メモリ</th>
+  <ti>64 MB</ti>
+</tr>
+<tr>
+  <th>ディスク容量</th>
+  <ti>1.5 GB (スワップ領域を除いて)</ti>
+</tr>
+<tr>
+  <th>スワップ領域</th>
+  <ti>最小256 MB</ti>
+</tr>
+</table>
+
+<p>
+サポートされているシステムの全てのリストを得るためには<uri>http://www.linuxppc64.org/hardware.shtml</uri>へ行ってください。
+</p>
+
+</body>
+</subsection>
+</section>
+<!-- Copy/paste from hb-install-x86-medium.xml, with s/x86/ppc64/ -->
+<!-- START -->
+<section>
+<title>Gentooインストール方法</title>
+<subsection>
+<title>はじめに</title>
+<body>
+
+<p>
+Gentoo Linuxは、三つの<e>stage</e>圧縮アーカイブファイルの中から一つを使用してインストールできます。
+stageファイルは、最小環境を含む圧縮されたアーカイブファイルです。
+</p>
+
+<ul>
+  <li>
+    stage1ファイルには、コンパイラ、Portage(Gentooのソフトウェア管理システム)と、コンパイラやPortageが依存する2〜3個のパッケージ以外は何も含まれていません。
+  </li>
+  <li>
+    stage2ファイルには、Gentoo環境を完全なものにする他のアプリケーション全てを構築可能な最小環境、いわゆるブートストラップシステムが含まれています。
+  </li>
+  <li>
+    stage3ファイルには、ほぼ完全に展開可能な構築済み最小システムが含まれています。どれをインストールしたいかをGentooユーザが選択しなければならない、ほんのわずかのアプリケーションだけが不足しています。
+  </li>
+</ul>
+
+<p>
+どのstageファイルを使用したらよいかを決めやすくするために、それぞれのstageファイルの主要な長所と短所を記載しました。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>stage1でのインストール</title>
+<body>
+
+<p>
+<e>stage1</e>は、ブートストラップして、何もないところから全部のシステムを構築したい場合に使用します。
+</p>
+
+<p>
+stage1から始めると、最適化設定と構築時に組み込み可能な機能を、全面的に制御することができます。それらは、あなたのシステムで初期段階から有効となります。何をしているか把握できるパワーユーザには、<e>stage1</e>でのインストールが適しているでしょう。Gentoo Linuxの内部動作についてより詳しく知りたい人にも、とても良いインストール方法です。
+</p>
+
+<table>
+<tr>
+  <th>stage1</th>
+  <th>長所と短所</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>
+    最適化設定と構築時に組み込み可能な機能を、全面的に制御することができ、それらは、あなたのシステムで初期段階から有効となります
+  </ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>何をしているかを把握できるパワーユーザに適しています</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>Gentooの内部動作についてより詳しく学ぶことができます</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>インストールを完了するまでに長い時間がかかります</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>
+    設定を微調整するつもりがないなら、おそらく時間の無駄です
+  </ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>
+    インストールしている間、インターネットに接続している必要があります
+  </ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+<subsection>
+<title>stage2でのインストール</title>
+<body>
+
+<p>
+<e>stage2</e>は、ブートストラップされた"ちょっとだけコンパイル済み"状態から全部のシステムを構築するために使用します。
+</p>
+
+<p>
+stage2でのインストールは、ブートストラップの工程を飛ばすことができます。
+私たちがstage2用に選定した最適化設定で満足できるなら最適です。
+</p>
+
+<table>
+<tr>
+  <th>stage2</th>
+  <th>長所と短所</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>ブートストラップ工程が必要ありません</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>stage1で始めるよりもインストールの所要時間は短いです</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>設定を微調整できます</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>stage1よりは微調整できません</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>それでも、Gentooをインストールする最速の方法ではありません</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>私たちが選定したブートストラップ工程用の最適化設定を受け入れなければなりません</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>
+    インストールしている間、インターネットに接続している必要があります
+  </ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+<subsection>
+<title>stage3でのインストール</title>
+<body>
+
+<p>
+<e>stage3</e>は、構築済みの基本的なGentoo Linuxシステムを含みます。
+どれを選択すべきか私たちには決めることができない、いくつかのパッケージを構築する必要があるだけです。
+</p>
+
+<p>
+stage3を選択すると、Gentoo Linuxの最速インストールが可能になりますが、システムの基本的な部分は、私たちが選定した最適化設定で構築されたものになります。(それは、はっきり言って良い設定であり、安定性を維持しながら性能を向上させるために注意深く選ばれたものです。)stage3は、構築済みパッケージを使用してGentooをインストールしたい場合や、ネットワーク接続なしでインストールしたい場合にも必要です。
+</p>
+
+<table>
+<tr>
+  <th>stage3</th>
+  <th>長所と短所</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>Gentooのベースシステムを構築するには最速の方法です</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>システムの基本的な部分を微調整できません - 既に構築済みです</ti>
+</tr>
+</table>
+
+<p>
+Gentooをインストールした後に別の最適化設定を使いたくなった場合、新しい最適化設定でシステム全体を再コンパイルできますが、その方法を知りたいと思うかもしれませんね。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>GentooのインストールCD</title>
+<subsection>
+<title>はじめに</title>
+<body>
+
+<p>
+<e>GentooのインストールCD</e>は、それだけで自立したGentoo環境を含むブート可能CDです。
+そのCDからLinuxを起動できます。ブート中にあなたのハードウェアが検知され、適切なドライバがロードされます。これらのインストールCDは、Gentoo開発者によってメンテナンスされています。
+</p>
+
+<p>
+すべてのインストールCDはブートし、ネットワークをセットアップし、パーティションを初期化し、そして、インターネットからGentooインストールを開始することができます。
+現在のところ二つのインストールCDを提供しています。
+利用できるパッケージの最新バージョンを使用してインターネット経由でGentooをインストールすることを考えているならば、この二つのインストールCDは同様に適しています。
+</p>
+
+<p>
+有効なインターネット接続なしでGentooをインストールしたいなら、<uri
+link="/doc/en/handbook/2005.1/index.xml">Gentoo 2005.1 Handbooks</uri>で記述されているインストール手順を使用してください。しかし、これはPPC64アーキテクチャでは現在サポートされていません。
+</p>
+
+<p>
+PowerPC64アーキテクチャのために、我々は<e>Minimal</e>インストールCDを提供します。これは、システムをブートしネットワーク接続を準備し、Gentooのインストールを続行することを唯一の目的とする、小さく実用的なブート可能CDです。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>GentooのMinimalインストールCD</title>
+<body>
+
+<p>
+MinimalインストールCDは、<c>install-ppc64-g5-minimal-2005.1.iso</c>または<c>install-ppc64-ibm-minimal-2005.1.iso</c>というファイル名で、ディスク容量は350 MBだけしか占有しません。Gentooをインストールするために、このインストールCDを使用できますが、常時接続のインターネット環境がある場合だけです。
+</p>
+
+<table>
+<tr>
+  <th>MinimalインストールCD</th>
+  <th>長所と短所</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>最小なのでダウンロードに時間がかからない</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>
+    ネットワークからstage圧縮アーカイブファイルを取得することによって、stage1、stage2、stage3のどれでも実行できます
+  </ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>
+    stageファイル、Portageスナップショット、構築済みパッケージを一つも含まないので、ネットワークなしでインストールするには適していません
+  </ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+<!-- STOP -->
+<section>
+<title>GentooインストールCDをダウンロードして、CDに焼いて、ブートします</title>
+<subsection>
+<title>インストールCDをダウンロードしてCDに焼く</title>
+<body>
+
+<p>
+使用するGentooインストールCDを選択します。まず選んだインストールCDをダウンロードしてCDに焼くことから開始します。何種類かのインストールCDについて既にお話しましたが、それらはどこにあるのでしょうか?
+</p>
+
+<p>
+<uri link="/main/en/mirrors.xml">ミラーサイト</uri>の中の一つから好きなインストールCD(と、望むなら同様にパッケージCD)をダウンロードできます。(訳注: 日本で利用できるミラーサイトを以下に抜粋します。)<br/>
+<uri link="http://mirror.gentoo.gr.jp">mirror.gentoo.gr.jp (Japan)</uri><br/>
+<uri link="http://gentoo.gg3.net/">gg3.net (Japan)</uri><br/>
+<uri link="ftp://gg3.net/pub/linux/gentoo/">gg3.net (Japan/ftp)</uri><br/>
+<uri link="ftp://ftp.ecc.u-tokyo.ac.jp/GENTOO">University of Tokyo (Japan/ftp)</uri><br/>
+インストールCDは<path>releases/ppc64/2005.1/installcd</path>ディレクトリにあります。
+</p>
+
+<p>
+そのディレクトリ内には、いわゆるISOファイルがあります。CD-Rに焼くことができる完全なCDイメージです。
+</p>
+
+<p>
+ダウンロードしたファイルが壊れているかも?と心配な場合は、ダウンロードしたファイルのMD5チェックサムをチェックし、私たちが提供するもの(<path>install-ppc64-g5-minimal-2005.1.iso.md5</path>のようなファイル)と比較します。Linux/Unixの<c>md5sum</c>ツールか、Windows用の<uri link="http://www.etree.org/md5com.html">md5sum</uri>でMD5チェックサムをチェックできます。
+</p>
+
+<p>
+ダウンロードしたファイルの正当性をチェックする別の方法は、私たちが提供する暗号化シグネチャ(<path>.asc</path>で終わるファイル)を確認するためにGnuPGを使用することです。以下のようにしてシグネチャファイルをダウンロードして、公開キーを取得してください。
+</p>
+
+<pre caption="公開キーの取得">
+$ <i>gpg --keyserver pgp.mit.edu --recv-keys 17072058</i>
+</pre>
+
+<p>
+では、以下のようにしてシグネチャを確認してください。
+</p>
+
+<pre caption="暗号化シグネチャの確認">
+$ <i>gpg --verify &lt;シグネチャファイル&gt; &lt;ダウンロードしたISOファイル&gt;</i>
+</pre>
+
+<p>
+ダウンロードしたISOファイルをCDに焼くために、ロー(raw)モードを選んでください。その方法は、使用するライタプログラム毎にまったく異なります。ここでは<c>cdrecord</c>と<c>K3B</c>についてお話します。より詳細な情報は、<uri
+link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri><uri
+link="/doc/ja/faq.xml#isoburning">(日本語訳)</uri>で見つかります。
+</p>
+
+<ul>
+  <li>
+    cdrecordを用いる場合、単に<c>cdrecord dev=/dev/hdc &lt;ダウンロードしたiso ファイル&gt;</c>と入力するだけです(<path>/dev/hdc</path>をあなたのCD-RWドライブのデバイスパスで置き換えてください)。
+  </li>
+  <li>
+    K3Bを用いる場合、メニューの<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>を選択してください。次に'Image to Burn'エリアにISOファイルを選びます。最後に<c>Start</c>ボタンを押します。(訳注: 日本語化されたk3bの場合、メニューの<c>ツール</c> &gt; <c>CD</c> &gt; <c>CDイメージを書き込む</c>を選択してください。次に'書き込むイメージ'エリアにISOファイルを選びます。最後に<c>開始</c>ボタンを押します。)  </li>
+  <li>
+    Mac OS X Pantherを用いる場合、<path>アプリケーション/ユーティリティ</path>から<c>ディスクユーティリティ</c>を実行し、メニューの<c>イメージ</c>から<c>開く</c>を選択し、メインウィンドウの中でマウントされたディスクイメージを選択し、<c>イメージ</c>メニューの中で<c>ディスクを作成</c>を選択してください。
+  </li>
+  <li>
+    Mac OS X Jaguarを用いる場合、<path>アプリケーション/ユーティリティ</path>から<c>Disk Copy</c>を実行し、メニューの<c>ファイル</c>から<c>イメージをCD/DVDに作成</c>を選択し、ISOを選択し<c>ディスクを作成</c>ボタンをクリックします。
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>一般的な選択: アップルまたはIBMのマシンでインストールCDからブートする</title>
+<body>
+
+<p>
+インストールCDをCD-ROMに置いて、システムを再起動してください。起動時に、Cキーを押したままにしてください。スクリーンの下で、親切な歓迎メッセージと<e>boot:</e>プロンプトによって迎えられるでしょう。
+</p>
+
+<p>
+また、このプロンプトでいくつかのカーネルオプションを調整することができます。以下の表は、追加することができる利用可能なブートオプションです。
+</p>
+
+<table>
+<tr>
+  <th>ブートオプション</th>
+  <th>説明</th>
+</tr>
+<tr>
+  <ti><c>video</c></ti>
+  <ti>
+    このオプションは、次のベンダー固有のタグの1つを取ります。<c>radeonfb</c>、<c>rivafb</c>、<c>atyfb</c>、<c>aty128</c>、または<c>ofonly</c>。使用したい解像度とリフレッシュレートをこのタグに続けることができます。例えば、<c>video=radeonfb:1280x1024@75</c>という風に設定します。何を選んでよいかわからなければ、<c>ofonly</c>は間違いなく動作するでしょう。
+  </ti>
+</tr>
+<tr>
+  <ti><c>nol3</c></ti>
+  <ti>
+    いくつかのpowerbookの3次キャッシュを無効にします(少なくとも17インチの液晶を搭載した機種で必要です)。
+  </ti>
+</tr>
+<tr>
+  <ti><c>debug</c></ti>
+  <ti>
+    詳細情報を出力するブートを選択すると、インストールCDをデバッグするために使うことのできるinitrdシェルが有効になります。
+  </ti>
+</tr>
+<tr>
+  <ti><c>sleep=X</c></ti>
+  <ti>
+    続行するまでX秒待ちます。これは、すぐにCDから読み出すことのできないいくつかの非常に古いSCSI CD-ROMに必要になることがあります。
+  </ti>
+</tr>
+<tr>
+  <ti><c>bootfrom=X</c></ti>
+  <ti>
+    違うデバイスからブートします。
+  </ti>
+</tr>
+</table>
+
+<p>
+このプロンプトでエンターを押すと、完全なGentoo Linux環境がCDからロードされます。<uri link="#booted">そして、ブートしたら…</uri>に進んでください。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>IBM pSeries</title>
+<body>
+
+<p>
+pSeriesは時々CDからオートブートをすることができません。マルチブートメニューの中でブート可能な機器としてcdromを設定する必要があるかもしれません。(起動時にF1)他のオプションは、OFに入りそこから設定します。
+</p>
+
+<p>
+1) OFの中へのブート (これは、シリアルコンソールで8またはグラフィックコンソールでF8を、キーボード・マウスなどなどのメッセージを見た時から押し始めます)
+</p>
+<p>
+2) コマンドを実行します 0> boot cdrom:1,yaboot
+</p>
+<p>
+3) 離れて楽しんでください!
+</p>
+
+</body>
+</subsection>
+<subsection id="booted">
+<title>そして、ブートしたら…</title>
+<body>
+
+<p>
+現在のコンソール上でルート("#")プロンプトによって迎えられるでしょう。Alt-fn-F2、Alt-fn-F3、そしてAlt-fn-F4を押すことによって他のコンソールに切り替えることができます。Alt-fn-F1を押して、最初のコンソールに戻ってください。
+</p>
+
+<p>
+もし、非USキーボードでGentooをシステムにインストールしているならば、キーボードのキーマップをロードするために、loadkeysを使ってください。利用可能なキーマップをリストするためには、<c>ls /usr/share/keymaps/i386</c>を実行してください。
+</p>
+
+<pre caption="利用可能なキーマップをリストする">
+<comment>(PPCはほとんどのシステム上でx86キーマップを使用します。インストールCD上で提供されている
+ mac/ppcキーマップはADBキーマップで、インストールCDのカーネルでは使用できません。)</comment>
+# <i>ls /usr/share/keymaps/i386</i>
+</pre>
+
+<p>
+さあ、選択したキーマップをロードしてください。
+</p>
+
+<pre caption="キーマップをロードする">
+# <i>loadkeys be-latin1</i>
+# <i>loadkeys jp106</i>(訳注:日本語キーボードの場合)
+</pre>
+
+<p>
+では、<uri link="#hardware">追加のハードウェア設定</uri>に進んでください。
+</p>
+
+</body>
+</subsection>
+<subsection id="hardware">
+<title>追加のハードウェア設定</title>
+<body>
+
+<p>
+インストールCDがブートするときに、全てのハードウェアデバイスを検出し、そのハードウェアをサポートする適切なカーネルモジュールをロードしようとします。それは、大抵の場合、とてもうまく機能します。しかし、時には必要とするカーネルモジュールを自動でロードしないかもしれません。PCI自動検出機能がシステムのハードウェアの一部を見逃してしまったら、手動で適切なカーネルモジュールをロードしなければなりません。
+</p>
+
+<p>
+次の例では(ネットワークインターフェースのある種類をサポートする)<c>8139too</c>モジュールをロードしてみています。
+</p>
+
+<pre caption="カーネルモジュールのロード">
+# <i>modprobe 8139too</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>自由選択: ハードディスク性能の調整</title>
+<body>
+
+<p>
+あなたが上級者なら、IDEハードディスクの性能を<c>hdparm</c>コマンドを使用して調整したいかもしれません。以下のように<c>-tT</c>オプションを付けてディスクの性能をテストできます。(より正確な結果を得るためにそれを数回実行します)
+</p>
+
+<pre caption="ディスク性能のテスト">
+# <i>hdparm -tT /dev/hda</i>
+</pre>
+
+<p>
+調整するには、ディスクに<path>/dev/hda</path>(あなたのディスクで置き換えてください)を使用した以下の例(もしくは、あなた自身の経験)を使用します。
+</p>
+
+<pre caption="ハードディスク性能の調整">
+<comment>DMAを有効にする:</comment>                        # <i>hdparm -d 1 /dev/hda</i>
+<comment>DMAを有効にする + 安全な性能強化オプション:</comment>  # <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="useraccounts">
+<title>自由選択: ユーザアカウント</title>
+<body>
+
+<p>
+インストール用の環境にあなた以外の人にアクセス権を与える予定があるか、(セキュリティ上の理由により)root権限なしで<c>irssi</c>IRCクライアントを使ってチャットしたいなら、必要なユーザアカウントを作成し、rootパスワードを変更する必要があります。
+</p>
+
+<p>
+rootパスワードを変更するには、以下のように<c>passwd</c>ユーティリティを使用してください。
+</p>
+
+<pre caption="rootパスワードの変更">
+# <i>passwd</i>
+New password: <comment>(新しいパスワードを入力)</comment>
+Re-enter password: <comment>(パスワードの再入力)</comment>
+</pre>
+
+<p>
+ユーザアカウントを作成するには、最初にユーザを作成して、次にパスワードを設定します。この作業には<c>useradd</c>コマンドと<c>passwd</c>コマンドを使用します。次の例では、&quot;john&quot;というユーザを作成します。
+</p>
+
+<pre caption="ユーザアカウントの作成">
+# <i>useradd -m -G users john</i>
+# <i>passwd john</i>
+New password: <comment>(johnのパスワードを入力)</comment>
+Re-enter password: <comment>(johnのパスワードを再入力)</comment>
+</pre>
+
+<p>
+以下のようにして、<c>su</c>コマンドを使用してrootユーザから新しく作成したユーザにユーザIDを変更できます。
+</p>
+
+<pre caption="ユーザIDを変更">
+# <i>su - john</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>自由選択: インストール中にドキュメントを表示する</title>
+<body>
+
+<p>
+インストールしている間にGentooハンドブックを表示したい場合、ユーザアカウントを作成してあるかを確認してください。(<uri link="#useraccounts">自由選択: ユーザアカウント</uri>を参照)その後、新しい端末に移るために<c>Alt-F2</c>を押して、そこでログインしてください。
+</p>
+
+<p>
+CDにある文書を表示したいなら、以下のように<c>links2</c>コマンドをすぐに実行できます。
+</p>
+
+<pre caption="CD上のドキュメントの表示">
+# <i>links2 /mnt/cdrom/docs/handbook/html/index.html</i>
+</pre>
+
+<p>
+しかし、オンラインのGentooハンドブックは、CDで提供されるものよりも新しいので、そちらを使用する方が好まれます。
+</p>
+
+<pre caption="オンラインドキュメントの表示">
+# <i>links2 http://www.gentoo.org/doc/en/handbook/handbook-ppc64.xml</i>
+</pre>
+
+<p>
+<c>Alt-F1</c>を押すことで、もとの端末に戻ることができます。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>自由選択: SSHデーモンの起動</title>
+<body>
+
+<p>
+Gentooをインストールしている間に、他のユーザに(おそらくそのユーザは、Gentooをインストールする手伝いをするか、あなたのためにそれと同様のことをするという理由で)コンピュータへアクセスすることを許可したいなら、ユーザアカウントを作成し、(そのユーザを<e>完全に信用</e>できる<e>場合だけ</e>)おそらくrootパスワードを与える必要もあります。
+</p>
+
+<p>
+SSHデーモンを起動するには、以下のコマンドを実行してください。
+</p>
+
+<pre caption="SSHデーモンの起動">
+# <i>/etc/init.d/sshd start</i>
+</pre>
+
+<p>
+sshdを使用できるようにするためには、まずネットワークをセットアップする必要があります。<uri link="?part=1&amp;chap=3">ネットワーク設定</uri>の章に進んでください。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
